@@ -1,3 +1,5 @@
+![tests](https://github.com/levsh/roview/workflows/tests/badge.svg)
+
 ```python
 In [1]: from roview import ro_list
 
