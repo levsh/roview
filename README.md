@@ -1,11 +1,11 @@
 ![tests](https://github.com/levsh/roview/workflows/tests/badge.svg)
 
 ```python
-In [1]: from roview import ro_list
+In [1]: from roview import rolist
 
 In [2]: l = [5, 0, 10]
 
-In [3]: ro_l = ro_list(l)
+In [3]: ro_l = rolist(l)
 
 In [4]: ro_l
 Out[4]: [5, 0, 10]
@@ -59,7 +59,7 @@ Out[12]: [5, 0, 10, 555]
 
 In [13]: l = [[]]
 
-In [14]: l_ro = ro_list(l, nested=True)
+In [14]: l_ro = rolist(l, nested=True)
 
 In [15]: l_ro[0].append(1)
 ---------------------------------------------------------------------------

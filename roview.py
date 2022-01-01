@@ -1,10 +1,10 @@
 from typing import Union
 
 
-__version__ = "0.1"
+__version__ = "0.2"
 
 
-RO_DICT_ENABLED_ATTRS: set = {
+RODICT_ENABLED_ATTRS: set = {
     "__class__",
     "__contains__",
     "__dir__",
@@ -36,7 +36,7 @@ RO_DICT_ENABLED_ATTRS: set = {
     "values",
 }
 
-RO_LIST_ENABLED_ATTRS: set = {
+ROLIST_ENABLED_ATTRS: set = {
     "__class__",
     "__contains__",
     "__dir__",
@@ -65,7 +65,7 @@ RO_LIST_ENABLED_ATTRS: set = {
     "index",
 }
 
-RO_SET_ENABLED_ATTRS: set = {
+ROSET_ENABLED_ATTRS: set = {
     "__and__",
     "__class__",
     "__contains__",
@@ -128,11 +128,11 @@ def roview(
                         o = getattr(cls_or_self.__original__, attr)(*args, **kwds)
                         if nested:
                             if isinstance(o, list):
-                                return ro_list(o, nested=True)
+                                return rolist(o, nested=True)
                             if isinstance(o, dict):
-                                return ro_dict(o, nested=True)
+                                return rodict(o, nested=True)
                             if isinstance(o, set):
-                                return ro_set(o, nested=True)
+                                return roset(o, nested=True)
                         return o
                     else:
                         return getattr(cls_or_self, attr)(*args, **kwds)
@@ -186,18 +186,18 @@ def roview(
         {} if hasattr(obj, "__dict__") else {"__slots__": ("__original__",)},
     )()
     if hasattr(obj, "__dict__"):
-        object.__setattr__(proxy, "__dict__", ro_dict(obj.__dict__))
+        object.__setattr__(proxy, "__dict__", rodict(obj.__dict__))
     object.__setattr__(proxy, "__original__", obj)
     return proxy
 
 
-def ro_dict(obj, nested: bool = False):
-    return roview(obj, enabled_attrs=RO_DICT_ENABLED_ATTRS, nested=nested)
+def rodict(obj, nested: bool = False):
+    return roview(obj, enabled_attrs=RODICT_ENABLED_ATTRS, nested=nested)
 
 
-def ro_list(obj, nested: bool = False):
-    return roview(obj, enabled_attrs=RO_LIST_ENABLED_ATTRS, nested=nested)
+def rolist(obj, nested: bool = False):
+    return roview(obj, enabled_attrs=ROLIST_ENABLED_ATTRS, nested=nested)
 
 
-def ro_set(obj, nested: bool = False):
-    return roview(obj, enabled_attrs=RO_SET_ENABLED_ATTRS, nested=nested)
+def roset(obj, nested: bool = False):
+    return roview(obj, enabled_attrs=ROSET_ENABLED_ATTRS, nested=nested)

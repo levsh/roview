@@ -1,6 +1,6 @@
 import pytest
 
-from roview import ro_dict, ro_list, ro_set, roview
+from roview import rodict, rolist, roset, roview
 
 
 def test_roview():
@@ -28,163 +28,163 @@ def test_roview():
 
 def test_rolist():
     lst = [5, 10, 0, [777]]
-    rolst = ro_list(lst)
+    ro_list = rolist(lst)
 
-    assert rolst.__class__.__name__ == "listROView"
-    assert isinstance(rolst, list)
-    assert id(rolst.__original__) == id(lst)
-    assert rolst == lst
-
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst.append(1)
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst.clear()
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst.extend([1])
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst.insert(0, 1)
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst.pop(0)
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst.remove(5)
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst.reverse()
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst.sort()
+    assert ro_list.__class__.__name__ == "listROView"
+    assert isinstance(ro_list, list)
+    assert id(ro_list.__original__) == id(lst)
+    assert ro_list == lst
 
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst += [1]
+        ro_list.append(1)
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst.foo = None
+        ro_list.clear()
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_list.extend([1])
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_list.insert(0, 1)
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_list.pop(0)
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_list.remove(5)
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_list.reverse()
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_list.sort()
 
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        append = rolst.append
+        ro_list += [1]
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_list.foo = None
+
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        append = ro_list.append
         append(123)
 
     with pytest.raises(AttributeError):
-        rolst.foo
+        ro_list.foo
 
-    assert 5 in rolst
-    assert rolst.copy() == lst
-    assert type(rolst.copy()) == list
-    assert str(rolst) == "[5, 10, 0, [777]]"
+    assert 5 in ro_list
+    assert ro_list.copy() == lst
+    assert type(ro_list.copy()) == list
+    assert str(ro_list) == "[5, 10, 0, [777]]"
 
-    assert list(rolst) == lst
-    assert type(list(rolst)) == list
+    assert list(ro_list) == lst
+    assert type(list(ro_list)) == list
 
     with pytest.raises(AttributeError, match=r"'list' object has no attribute '__dict__'"):
-        rolst.__dict__
+        ro_list.__dict__
 
     with pytest.raises(AttributeError, match=r"'listROView' object has no attribute 'foo'"):
-        object.__setattr__(rolst, "foo", True)
+        object.__setattr__(ro_list, "foo", True)
 
 
 def test_rodict():
     dct = {"5": 5, "10": 10}
-    rodct = ro_dict(dct)
+    ro_dict = rodict(dct)
 
-    assert rodct.__class__.__name__ == "dictROView"
-    assert isinstance(rodct, dict)
-    assert id(rodct.__original__) == id(dct)
-    assert rodct == dct
-
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rodct.clear()
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rodct.pop("5")
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rodct.popitem()
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rodct.setdefault("100", 100)
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rodct.update({"100": 100})
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        del rodct["5"]
-    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rodct["100"] = 100
+    assert ro_dict.__class__.__name__ == "dictROView"
+    assert isinstance(ro_dict, dict)
+    assert id(ro_dict.__original__) == id(dct)
+    assert ro_dict == dct
 
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rodct.foo = None
+        ro_dict.clear()
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_dict.pop("5")
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_dict.popitem()
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_dict.setdefault("100", 100)
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_dict.update({"100": 100})
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        del ro_dict["5"]
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        ro_dict["100"] = 100
 
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        update = rodct.update
+        ro_dict.foo = None
+
+    with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
+        update = ro_dict.update
         update({"100": 100})
 
     with pytest.raises(AttributeError):
-        rodct.foo
+        ro_dict.foo
 
-    assert "5" in rodct
-    assert rodct.copy() == dct
-    assert type(rodct.copy()) == dict
-    assert str(rodct) == "{'5': 5, '10': 10}"
+    assert "5" in ro_dict
+    assert ro_dict.copy() == dct
+    assert type(ro_dict.copy()) == dict
+    assert str(ro_dict) == "{'5': 5, '10': 10}"
 
     with pytest.raises(AttributeError, match=r"'dict' object has no attribute '__dict__'"):
-        rodct.__dict__
+        ro_dict.__dict__
 
     with pytest.raises(AttributeError, match=r"'dictROView' object has no attribute 'foo'"):
-        object.__setattr__(rodct, "foo", True)
+        object.__setattr__(ro_dict, "foo", True)
 
 
 def test_roset():
     s = {0, 1, 2}
-    roset = ro_set(s)
+    ro_set = roset(s)
 
-    assert roset.__class__.__name__ == "setROView"
-    assert isinstance(roset, set)
-    assert id(roset.__original__) == id(s)
-    assert roset == s
+    assert ro_set.__class__.__name__ == "setROView"
+    assert isinstance(ro_set, set)
+    assert id(ro_set.__original__) == id(s)
+    assert ro_set == s
 
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        roset.add(1)
+        ro_set.add(1)
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        roset.clear()
+        ro_set.clear()
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        roset.difference_update({1})
+        ro_set.difference_update({1})
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        roset.discard(1)
+        ro_set.discard(1)
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        roset.intersection_update({1})
+        ro_set.intersection_update({1})
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        roset.pop()
+        ro_set.pop()
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        roset.remove(1)
+        ro_set.remove(1)
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        roset.symmetric_difference_update({1})
+        ro_set.symmetric_difference_update({1})
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        roset.update({1})
+        ro_set.update({1})
 
     with pytest.raises(AttributeError):
-        roset.foo
+        ro_set.foo
 
-    assert 0 in roset
-    assert roset.copy() == s
-    assert type(roset.copy()) == set
-    assert str(roset) == "{0, 1, 2}"
+    assert 0 in ro_set
+    assert ro_set.copy() == s
+    assert type(ro_set.copy()) == set
+    assert str(ro_set) == "{0, 1, 2}"
 
     with pytest.raises(AttributeError, match=r"'set' object has no attribute '__dict__'"):
-        roset.__dict__
+        ro_set.__dict__
 
     with pytest.raises(AttributeError, match=r"'setROView' object has no attribute 'foo'"):
-        object.__setattr__(roset, "foo", True)
+        object.__setattr__(ro_set, "foo", True)
 
 
 def test_nested():
     lst = [[1]]
 
-    rolst = ro_list(lst)
-    rolst[0].clear()
+    ro_list = rolist(lst)
+    ro_list[0].clear()
     assert lst[0] == []
 
-    rolst = ro_list(lst, nested=True)
+    ro_list = rolist(lst, nested=True)
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rolst[0].clear()
+        ro_list[0].clear()
 
     dct = {"a": {"b": "b"}}
 
-    rodct = ro_dict(dct)
-    rodct["a"].clear()
-    assert rodct["a"] == {}
+    ro_dict = rodict(dct)
+    ro_dict["a"].clear()
+    assert ro_dict["a"] == {}
 
-    rodct = ro_dict(dct, nested=True)
+    ro_dict = rodict(dct, nested=True)
     with pytest.raises(AttributeError, match=r"Attribute '.*' is not enabled"):
-        rodct["a"].clear()
+        ro_dict["a"].clear()
