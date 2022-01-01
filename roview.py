@@ -128,11 +128,11 @@ def roview(
                         o = getattr(cls_or_self.__original__, attr)(*args, **kwds)
                         if nested:
                             if isinstance(o, list):
-                                return ro_list(o)
+                                return ro_list(o, nested=True)
                             if isinstance(o, dict):
-                                return ro_dict(o)
+                                return ro_dict(o, nested=True)
                             if isinstance(o, set):
-                                return ro_set(o)
+                                return ro_set(o, nested=True)
                         return o
                     else:
                         return getattr(cls_or_self, attr)(*args, **kwds)
