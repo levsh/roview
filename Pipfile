@@ -6,10 +6,12 @@ name = "pypi"
 [packages]
 
 [dev-packages]
+build = "*"
 coverage = "*"
 flake8 = "*"
 invoke = "*"
 pytest = "*"
+twine = "*"
 
 [requires]
 python_version = "3"

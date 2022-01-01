@@ -11,3 +11,13 @@ def run_linter(c):
 def run_tests(c):
     cmd = "pipenv run coverage run --source roview -m pytest tests.py && pipenv run coverage report -m"
     c.run(cmd)
+
+
+@task
+def build(c):
+    c.run("python -m build")
+
+
+@task
+def publish(c):
+    c.run("python -m twine upload --repository pypi dist/*")
