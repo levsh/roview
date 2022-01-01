@@ -1,7 +1,7 @@
 from typing import Union
 
 
-__version__ = "0.2"
+__version__ = "0.3"
 
 
 RODICT_ENABLED_ATTRS: set = {
@@ -24,6 +24,8 @@ RODICT_ENABLED_ATTRS: set = {
     "__lt__",
     "__ne__",
     "__new__",
+    "__reduce__",
+    "__reduce_ex__",
     "__repr__",
     "__sizeof__",
     "__str__",
@@ -56,6 +58,8 @@ ROLIST_ENABLED_ATTRS: set = {
     "__lt__",
     "__ne__",
     "__new__",
+    "__reduce__",
+    "__reduce_ex__",
     "__repr__",
     "__sizeof__",
     "__str__",
@@ -87,6 +91,8 @@ ROSET_ENABLED_ATTRS: set = {
     "__new__",
     "__or__",
     "__rand__",
+    "__reduce__",
+    "__reduce_ex__",
     "__repr__",
     "__ror__",
     "__rsub__",
