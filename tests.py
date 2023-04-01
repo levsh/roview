@@ -1,5 +1,4 @@
 import pytest
-
 from roview import rodict, rolist, roset, roview
 
 
@@ -78,6 +77,10 @@ def test_rolist():
     with pytest.raises(AttributeError, match=r"'listROView' object has no attribute 'foo'"):
         object.__setattr__(ro_list, "foo", True)
 
+    assert rolist([1, 2, 3]) == rolist([1, 2, 3])
+    assert rolist([1, 2, 3]) != rolist([3, 2, 1])
+    assert (rolist([1, 2, 3]) == rolist([3, 2, 1])) is False
+
 
 def test_rodict():
     dct = {"5": 5, "10": 10}
@@ -124,6 +127,10 @@ def test_rodict():
     with pytest.raises(AttributeError, match=r"'dictROView' object has no attribute 'foo'"):
         object.__setattr__(ro_dict, "foo", True)
 
+    assert rodict({"a": "A"}) == rodict({"a": "A"})
+    assert rodict({"a": "A"}) != rodict({"b": "B"})
+    assert (rodict({"a": "A"}) == rodict({"b": "B"})) is False
+
 
 def test_roset():
     s = {0, 1, 2}
@@ -166,6 +173,10 @@ def test_roset():
 
     with pytest.raises(AttributeError, match=r"'setROView' object has no attribute 'foo'"):
         object.__setattr__(ro_set, "foo", True)
+
+    assert roset({1, 2, 3}) == roset({1, 2, 3})
+    assert roset({1, 2, 3}) == roset({3, 2, 1})
+    assert (roset({1, 2, 3}) != roset({3, 2, 1})) is False
 
 
 def test_nested():

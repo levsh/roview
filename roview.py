@@ -1,7 +1,6 @@
 from typing import Union
 
-
-__version__ = "0.3"
+__version__ = "0.4.0"
 
 
 RODICT_ENABLED_ATTRS: set = {
@@ -185,6 +184,16 @@ def roview(
 
         def __getattr__(self, attr):
             return getattr(obj, attr)
+
+        def __eq__(self, other):
+            if hasattr(other, "__original__"):
+                return self.__original__ == other.__original__
+            return self.__original__ == other
+
+        def __ne__(self, other):
+            if hasattr(other, "__original__"):
+                return self.__original__ != other.__original__
+            return self.__original__ != other
 
     proxy = type(
         f"{obj.__class__.__name__}ROView",
